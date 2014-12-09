@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+	 <id>$id$</id>
+	 <version>$version$</version>
+	 <title>$title$</title>
+	 <authors>$author$</authors>
+	 <owners>$author$</owners>
+	 <licenseUrl>https://www.devexpress.com/</licenseUrl>
+	 <projectUrl>https://www.devexpress.com/</projectUrl>
+	 <iconUrl>https://www.devexpress.com/favicon.ico</iconUrl>
+	 <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	 <description>$description$</description>
+	 <releaseNotes>
+		v2014.1.7.1: Encoding issue fixed with files and folders containing spaces or other non ASCII chars
+						 Better error handling incase a user revokes access to the application
+		v2014.1.7.0: Initial release 
+	 </releaseNotes>
+	 <copyright>Copyright 2014</copyright>
+	 <tags>DevExpress ASPxFileManager DropBox</tags>
+	 <references>
+		<reference file="$TargetFileName$" />
+	 </references>
+
+  </metadata>
+  <files>
+	 <file src="web.config.transform" target="content\web.config.transform" />
+	 <file src="Install.ps1" target="Tools\Install.ps1" />
+	 <file src="readme.txt" target="" />
+
+	 <file src="content\Images\DropBoxTypes\48x48\folder48.gif" target="content\Images\DropBoxTypes\48x48\folder48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_app48.gif" target="content\Images\DropBoxTypes\48x48\folder_app48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_camera48.gif" target="content\Images\DropBoxTypes\48x48\folder_camera48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_gray48.gif" target="content\Images\DropBoxTypes\48x48\folder_gray48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_public48.gif" target="content\Images\DropBoxTypes\48x48\folder_public48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_star48.gif" target="content\Images\DropBoxTypes\48x48\folder_star48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_user48.gif" target="content\Images\DropBoxTypes\48x48\folder_user48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\folder_user_gray48.gif" target="content\Images\DropBoxTypes\48x48\folder_user_gray48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\music48.gif" target="content\Images\DropBoxTypes\48x48\music48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\package48.gif" target="content\Images\DropBoxTypes\48x48\package48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white48.gif" target="content\Images\DropBoxTypes\48x48\page_white48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_acrobat48.gif" target="content\Images\DropBoxTypes\48x48\page_white_acrobat48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_actionscript48.gif" target="content\Images\DropBoxTypes\48x48\page_white_actionscript48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_c48.gif" target="content\Images\DropBoxTypes\48x48\page_white_c48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_code48.gif" target="content\Images\DropBoxTypes\48x48\page_white_code48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_compressed48.gif" target="content\Images\DropBoxTypes\48x48\page_white_compressed48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_cplusplus48.gif" target="content\Images\DropBoxTypes\48x48\page_white_cplusplus48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_csharp.gif" target="content\Images\DropBoxTypes\48x48\page_white_csharp.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_cup48.gif" target="content\Images\DropBoxTypes\48x48\page_white_cup48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_dvd.gif" target="content\Images\DropBoxTypes\48x48\page_white_dvd.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_excel48.gif" target="content\Images\DropBoxTypes\48x48\page_white_excel48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_flash48.gif" target="content\Images\DropBoxTypes\48x48\page_white_flash48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_gear48.gif" target="content\Images\DropBoxTypes\48x48\page_white_gear48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_h48.gif" target="content\Images\DropBoxTypes\48x48\page_white_h48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_paint48.gif" target="content\Images\DropBoxTypes\48x48\page_white_paint48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_php48.gif" target="content\Images\DropBoxTypes\48x48\page_white_php48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_picture48.gif" target="content\Images\DropBoxTypes\48x48\page_white_picture48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_powerpoint48.gif" target="content\Images\DropBoxTypes\48x48\page_white_powerpoint48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_ruby48.gif" target="content\Images\DropBoxTypes\48x48\page_white_ruby48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_text48.gif" target="content\Images\DropBoxTypes\48x48\page_white_text48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_tux48.gif" target="content\Images\DropBoxTypes\48x48\page_white_tux48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_vector48.gif" target="content\Images\DropBoxTypes\48x48\page_white_vector48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_visualstudio48.gif" target="content\Images\DropBoxTypes\48x48\page_white_visualstudio48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_word48.gif" target="content\Images\DropBoxTypes\48x48\page_white_word48.gif" />
+	 <file src="content\Images\DropBoxTypes\48x48\page_white_zip48.gif" target="content\Images\DropBoxTypes\48x48\page_white_zip48.gif" />
+  </files>
+</package>
+<!--
+Powershell command to determine wether DevExpress v14.1 is installed:
+
+$exists = Get-ItemProperty "HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*" | where {$_.DisplayName -match "DevExpress Components 14.2"} | select DisplayName
+
+If exists: $exists = "DevExpress Components 14.2" if not $exists = "";
+
+-->

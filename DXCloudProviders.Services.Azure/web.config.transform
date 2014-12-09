@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <connectionStrings>
+	 <add name="StorageConnectionString" connectionString="--- Y O U R  A Z U R E  C O N N E C T I O N  S T R I N G---"/>
+  </connectionStrings>
+  <appSettings>
+	 <!-- Your container name here -->
+	 <add key="DXBlobContainer" value="test" />
+  </appSettings>
+</configuration>
+
+
