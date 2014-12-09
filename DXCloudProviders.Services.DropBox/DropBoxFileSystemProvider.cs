@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
@@ -15,11 +13,21 @@ using System.Web.Hosting;
 using System.Web.UI.WebControls;
 using DevExpress.Utils.OAuth;
 using DevExpress.Web;
+using System.Web.Routing;
 
 namespace DXCloudProviders.Services.DropBox
 {
 	 public class DropBoxFileSystemProvider : FileSystemProviderBase
 	 {
+		  static DropBoxFileSystemProvider()
+		  {
+				Trace.WriteLine("Static constructor DropBoxFileSystemProvider called");
+				if (HttpContext.Current != null && (RouteTable.Routes[typeof(DropboxFileSystemProvider).AssemblyQualifiedName] == null))
+				{
+					 RouteTable.Routes.Add(typeof(DropboxFileSystemProvider).AssemblyQualifiedName, new Route(DropBoxSignonRouteHandler.SignOnUrl, new DropBoxSignonRouteHandler()));
+				}
+		  }
+
 		  public DropBoxFileSystemProvider(string rootFolder)
 				: base(rootFolder)
 		  {
@@ -555,7 +563,7 @@ namespace DXCloudProviders.Services.DropBox
 				return String.Empty;
 		  }
 
-		  public static void InitializeFileManager(DevExpress.Web.ASPxFileManager fileManager)
+		  public static void InitializeFileManager(ASPxFileManager fileManager)
 		  {
 				fileManager.Settings.ThumbnailFolder = ThumbnailRootFolder;
 				fileManager.CustomThumbnail += ASPxFileManager_CustomThumbnail;
@@ -564,7 +572,7 @@ namespace DXCloudProviders.Services.DropBox
 
 		  public static void ASPxFileManager_CustomThumbnail(object source, FileManagerThumbnailCreateEventArgs e)
 		  {
-				DevExpress.Web.ASPxFileManager fm = source as DevExpress.Web.ASPxFileManager;
+				ASPxFileManager fm = source as ASPxFileManager;
 				if ((fm == null) || (fm.CustomFileSystemProvider == null) ||
 					 (!typeof(DropBoxFileSystemProvider).IsAssignableFrom(fm.CustomFileSystemProvider.GetType())))
 					 return;
@@ -599,7 +607,7 @@ namespace DXCloudProviders.Services.DropBox
 
 		  public static void ASPxFileManager_FileDownloading(object source, FileManagerFileDownloadingEventArgs e)
 		  {
-				DevExpress.Web.ASPxFileManager fm = source as DevExpress.Web.ASPxFileManager;
+				ASPxFileManager fm = source as ASPxFileManager;
 				if ((fm == null) || (fm.CustomFileSystemProvider == null) ||
 					 (!typeof(DropBoxFileSystemProvider).IsAssignableFrom(fm.CustomFileSystemProvider.GetType())))
 					 return;

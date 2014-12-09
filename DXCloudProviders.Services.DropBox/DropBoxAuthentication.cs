@@ -7,10 +7,24 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using DevExpress.Utils.OAuth;    
+using DevExpress.Utils.OAuth;
+using System.Web.Routing;
+using System.Web.SessionState;    
 
 namespace DXCloudProviders.Services.DropBox
 {
+	 public class DropBoxSignonRouteHandler : IRouteHandler
+	 {
+		  public const string SignOnUrl = "DXDropBoxSignOn";
+		  public IHttpHandler GetHttpHandler(RequestContext requestContext) { return new DropBoxSignonHandler(); }
+	
+		  public class DropBoxSignonHandler : IHttpHandler, IRequiresSessionState
+		  {
+				public bool IsReusable { get { return false; } }
+				public void ProcessRequest(HttpContext context) { DropBoxAuthentication.ProcessAuthorized(context); }
+		  }
+	 }
+
 	 public static class DropBoxAuthentication
 	 {
 		  public const string QueryNameOAuthCallback = "oauth_callback";
@@ -22,7 +36,15 @@ namespace DXCloudProviders.Services.DropBox
 
 		  public static string Key { get { return ConfigurationManager.AppSettings["Dropbox_Consumer_Key"]; } }
 		  public static string Secret { get { return ConfigurationManager.AppSettings["Dropbox_Consumer_Secret"]; } }
-		  public static string RedirectUrl { get { return ConfigurationManager.AppSettings["Dropbox_RedirectUrl"]; } }
+
+		  public static string RedirectUrl
+		  {
+				get
+				{
+					 return ConfigurationManager.AppSettings["Dropbox_RedirectUrl"] ??
+						  String.Format("~/{0}?{1}={2}", DropBoxSignonRouteHandler.SignOnUrl.ToLowerInvariant(), QueryNameOAuthCallback, QueryValOAuthCallback);
+				}
+		  }
 
 		  public static Consumer CreateConsumerForDropbox(Uri callback, string httpMethod = "GET")
 		  {
@@ -49,7 +71,11 @@ namespace DXCloudProviders.Services.DropBox
 				return CreateConsumerForDropbox(callback).GetAuthorizeTokenUrl("2.0").ToString();
 		  }
 
-		  public static void Signout(HttpContext ctx, string redirectUrl)
+		  public static bool IsAuthenticated(HttpContext context)
+		  {
+				return (context.Session[SessionNameTicket] as Dropbox_Me) != null;
+		  }
+		public static void Signout(HttpContext ctx, string redirectUrl)
 		  {
 				if (ctx == null)
 					 throw new ArgumentNullException("ctx");
@@ -71,8 +97,7 @@ namespace DXCloudProviders.Services.DropBox
 					 DevExpress.Web.ASPxEdit.RedirectOnCallback(redirectUrl ?? ctx.Request.Url.ToString());
 				else
 				{
-					 ctx.Response.Redirect(redirectUrl ?? ctx.Request.Url.ToString(), false);
-					 ctx.ApplicationInstance.CompleteRequest();
+					 ctx.Response.Redirect(redirectUrl ?? ctx.Request.Url.ToString());			
 				}
 		  }
 
@@ -113,6 +138,7 @@ namespace DXCloudProviders.Services.DropBox
 					 if (ticket.IsAuthenticated)
 					 {
 						  ticket.SetAccessToken(accessToken.Value);
+						  
 						  ctx.Session[SessionNameTicket] = ticket;
 						  string returnUrl = "~/";
 						  if (!String.IsNullOrEmpty((string)ctx.Session[SessionNameReturnUrl]))
@@ -125,8 +151,7 @@ namespace DXCloudProviders.Services.DropBox
 					 }
 				}
 					
-				ctx.Response.Redirect("~/", false);
-				ctx.ApplicationInstance.CompleteRequest();
+				ctx.Response.Redirect("~/");		
 		  }
 
 		  static Dropbox_Me FromDropbox(Consumer auth)

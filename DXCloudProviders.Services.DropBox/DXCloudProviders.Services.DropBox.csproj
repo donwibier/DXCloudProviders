@@ -7,8 +7,8 @@
     <ProjectGuid>{CF7DF5CC-27A9-45C8-81D3-B4E34925FE65}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DevExpress.Web.AppServices.DropBox</RootNamespace>
-    <AssemblyName>DevExpress.Web.AppServices.DropBox.v14.1</AssemblyName>
+    <RootNamespace>DXCloudProviders.Services.DropBox</RootNamespace>
+    <AssemblyName>DXCloudProviders.Services.DropBox.v14.1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>

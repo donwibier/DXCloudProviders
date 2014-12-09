@@ -2,18 +2,14 @@
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.UI.WebControls;
-using System.Drawing;
 using System.Threading.Tasks;
 
 namespace DXCloudProviders.Services.Azure
@@ -277,11 +273,9 @@ namespace DXCloudProviders.Services.Azure
 		  }
 		  static BlobFolder GetContainer(string relativeFolder, string blobContainer, CloudBlobClient client)
 		  {
-				BlobFolder result = null;
-				BlobCache cache = HostingEnvironment.Cache[GetCacheKey(client.Credentials.ExportBase64EncodedKey(), blobContainer, "blobCache")] as BlobCache;
 				string folderToFind = MakeRelativePath(blobContainer, relativeFolder);
-				if (cache != null)
-					 result = cache.FindFolder(folderToFind);
+				BlobCache cache = HostingEnvironment.Cache[GetCacheKey(client.Credentials.ExportBase64EncodedKey(), blobContainer, "blobCache")] as BlobCache;				
+				BlobFolder result = (cache != null) ? cache.FindFolder(folderToFind) : null;				
 
 				if ((cache == null) || (result == null))
 				{
@@ -343,7 +337,7 @@ namespace DXCloudProviders.Services.Azure
 		  }
 
 
-		  protected string BlobContainer
+		  protected static string BlobContainer
 		  {
 				get
 				{
@@ -497,7 +491,7 @@ namespace DXCloudProviders.Services.Azure
 				return String.Empty;
 		  }
 
-		  public static void InitializeFileManager(DevExpress.Web.ASPxFileManager fileManager)
+		  public static void InitializeFileManager(ASPxFileManager fileManager)
 		  {
 				fileManager.Settings.ThumbnailFolder = ThumbnailRootFolder;
 				fileManager.CustomThumbnail += ASPxFileManager_CustomThumbnail;
@@ -506,7 +500,7 @@ namespace DXCloudProviders.Services.Azure
 		  static readonly object fileLock = new object();
 		  public static void ASPxFileManager_CustomThumbnail(object source, FileManagerThumbnailCreateEventArgs e)
 		  {
-				DevExpress.Web.ASPxFileManager fm = source as DevExpress.Web.ASPxFileManager;
+				ASPxFileManager fm = source as ASPxFileManager;
 				if ((fm == null) || (fm.CustomFileSystemProvider == null) ||
 					 (!typeof(BlobStorageFileSystemProvider).IsAssignableFrom(fm.CustomFileSystemProvider.GetType())))
 					 return;
@@ -515,10 +509,10 @@ namespace DXCloudProviders.Services.Azure
 				string filePath = MakeRelativePath(e.File.RelativeName);
 
 				BlobStorageFileSystemProvider provider = (BlobStorageFileSystemProvider)fm.CustomFileSystemProvider;
-				string thumbUrl = GetThumbNailUrl(fm.Settings.ThumbnailFolder, String.Format("{0}/{1}", provider.account.Credentials.AccountName, provider.BlobContainer), filePath);
+				string thumbUrl = GetThumbNailUrl(fm.Settings.ThumbnailFolder, String.Format("{0}/{1}", provider.account.Credentials.AccountName, BlobStorageFileSystemProvider.BlobContainer), filePath);
 				// todo some cropping should occur here since dimensions are not used
 				if (!String.IsNullOrEmpty(thumbUrl))
-				{					
+				{
 					 e.ThumbnailImage.Width = Unit.Pixel(62);
 					 e.ThumbnailImage.Height = Unit.Pixel(42);
 					 e.ThumbnailImage.Url = thumbUrl;
@@ -533,17 +527,17 @@ namespace DXCloudProviders.Services.Azure
 
 		  public static void ASPxFileManager_FileDownloading(object source, FileManagerFileDownloadingEventArgs e)
 		  {
-				DevExpress.Web.ASPxFileManager fm = source as DevExpress.Web.ASPxFileManager;
+				ASPxFileManager fm = source as ASPxFileManager;
 				if ((fm == null) || (fm.CustomFileSystemProvider == null) ||
 					 (!typeof(BlobStorageFileSystemProvider).IsAssignableFrom(fm.CustomFileSystemProvider.GetType())))
 					 return;
 
-				string filePath = MakeRelativePath(false, e.File.RelativeName);				
+				string filePath = MakeRelativePath(false, e.File.RelativeName);
 
 				BlobStorageFileSystemProvider provider = (BlobStorageFileSystemProvider)fm.CustomFileSystemProvider;
 
 				CloudBlobClient client = provider.account.CreateCloudBlobClient();
-				CloudBlobContainer container = client.GetContainerReference(provider.BlobContainer);
+				CloudBlobContainer container = client.GetContainerReference(BlobStorageFileSystemProvider.BlobContainer);
 				container.CreateIfNotExists(BlobContainerPublicAccessType.Container);
 				var blob = container.GetBlobReferenceFromServer(filePath);
 				HttpContext.Current.Response.Redirect(blob.Uri.ToString());

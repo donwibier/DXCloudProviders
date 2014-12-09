@@ -4,12 +4,14 @@
      <add key="Dropbox_Consumer_Key" value="--- Y O U R  D R O P B O X  K E Y ---" />
      <add key="Dropbox_Consumer_Secret" value="--- Y O U R  D R O P B O X  S E C R E T ---" />
 	  <!-- 
+		  In case you want a custom returnUrl for Dropbox:
+		  
 		  A blank webform with code-behind:
 	  	  protected void Page_Load(object sender, EventArgs e)
 		  {
 				DropBoxAuthentication.ProcessAuthorized(Context);				
 		  }
-	  -->
-     <add key="Dropbox_RedirectUrl " value="~/Signin.aspx?oauth_callback=Dropbox" />
+	   -->
+		<!-- <add key="Dropbox_RedirectUrl " value="~/Signin.aspx?oauth_callback=Dropbox" /> -->
     </appSettings>
 </configuration>

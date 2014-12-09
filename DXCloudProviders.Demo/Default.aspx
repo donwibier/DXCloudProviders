@@ -11,39 +11,53 @@
 <body>
     <form id="form1" runat="server">
     <div>
-		  <h1>Using the ASPxFileManager with Dropbox</h1>
-		  <div style="float: left">
-				<dx:ASPxComboBox id="cbxFileSystem" runat="server" valuetype="System.String" selectedindex="0"
-					 caption="Select filesystem">
-            <Items>
-                <dx:ListEditItem Text="Local folder" Value="Local" />
-                <dx:ListEditItem Text="DropBox" Value="Dropbox" />
-					 <dx:ListEditItem Text="Azure Blob Storage" Value="Blob" />
-            </Items>
-            <ClientSideEvents SelectedIndexChanged="function(s, e) { 
-						  if(s.GetSelectedIndex() == 0)
-								window.location.replace('/Default.aspx');
-						  else {
-								var url = '/Default.aspx?Service=' + s.GetValue();
-								window.location.replace(url);
-						  }
-                }" />
-        </dx:ASPxComboBox>				
-		  </div>
-		  <div style="float: right">
-				<asp:LinkButton runat="server" ID="btLogout" Text="Logout (and loose Dropbox account)" Visible="false" OnClick="btLogout_Click">
+		  <h1>Using the ASPxFileManager with Dropbox</h1>		  
+		  <asp:LinkButton runat="server" ID="btLogout" Text="Logout (and loose Dropbox account)" Visible="false" OnClick="btLogout_Click">
 
-				</asp:LinkButton>
-		  </div>
+		  </asp:LinkButton>		  		  
 		  <br />
 		  <dx:ASPxFileManager ID="ASPxFileManager1" runat="server" ClientInstanceName="dxFm">
+            <ClientSideEvents
+					 CustomCommand="function(s, e) {
+										  var service = '';
+						              switch(e.commandName) {
+												case 'Dropbox':
+												case 'Blob':
+													 service = '?Service=' + e.commandName;
+													 break;
+										  }
+										  window.location.replace('/Default.aspx' + service);
+									 }" />
             <Settings RootFolder="~\" ThumbnailFolder="~\Thumb\" />
             <SettingsFileList>
 					 <ThumbnailsViewSettings ThumbnailSize="64px" />
 				</SettingsFileList>
             <SettingsEditing AllowCopy="True" AllowCreate="True" AllowDelete="True" AllowMove="True" AllowRename="True" />
             <SettingsFolders EnableCallBacks="True" />
-            <SettingsToolbar ShowDownloadButton="True" />
+            <SettingsToolbar ShowDownloadButton="True" >
+					 <Items>
+						  <dx:FileManagerToolbarCreateButton>
+						  </dx:FileManagerToolbarCreateButton>
+						  <dx:FileManagerToolbarRenameButton>
+						  </dx:FileManagerToolbarRenameButton>
+						  <dx:FileManagerToolbarMoveButton>
+						  </dx:FileManagerToolbarMoveButton>
+						  <dx:FileManagerToolbarCopyButton>
+						  </dx:FileManagerToolbarCopyButton>
+						  <dx:FileManagerToolbarDeleteButton>
+						  </dx:FileManagerToolbarDeleteButton>
+						  <dx:FileManagerToolbarRefreshButton>
+						  </dx:FileManagerToolbarRefreshButton>
+						  <dx:FileManagerToolbarDownloadButton BeginGroup="True">
+						  </dx:FileManagerToolbarDownloadButton>
+						  <dx:FileManagerToolbarCustomButton CommandName="Local" GroupName="FS" Text="Local" BeginGroup="True">
+						  </dx:FileManagerToolbarCustomButton>
+						  <dx:FileManagerToolbarCustomButton CommandName="Dropbox" GroupName="FS" Text="Dropbox">
+						  </dx:FileManagerToolbarCustomButton>
+						  <dx:FileManagerToolbarCustomButton CommandName="Blob" GroupName="FS" Text="Azure">
+						  </dx:FileManagerToolbarCustomButton>
+					 </Items>
+				</SettingsToolbar>
 				<SettingsUpload UseAdvancedUploadMode="True">
 					 <AdvancedModeSettings EnableMultiSelect="true" />
 				</SettingsUpload>
