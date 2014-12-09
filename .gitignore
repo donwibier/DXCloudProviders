@@ -1,0 +1,7 @@
+*.dll
+*.nupkg
+*.pdb
+*.xml
+*.user
+*.vspscc
+.nuget/NuGet.exe
