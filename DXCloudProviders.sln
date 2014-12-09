@@ -1,0 +1,40 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{75FDD098-A799-4D80-9271-E563717CE6DC}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config		
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXCloudProviders.Demo", "DXCloudProviders.Demo\DXCloudProviders.Demo.csproj", "{986EFFBE-3C62-46EA-880B-4E4FCBC2221C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXCloudProviders.Services.Azure", "DXCloudProviders.Services.Azure\DXCloudProviders.Services.Azure.csproj", "{122DD18A-397A-4176-9156-4E53A5583FF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXCloudProviders.Services.DropBox", "DXCloudProviders.Services.DropBox\DXCloudProviders.Services.DropBox.csproj", "{CF7DF5CC-27A9-45C8-81D3-B4E34925FE65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{986EFFBE-3C62-46EA-880B-4E4FCBC2221C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{986EFFBE-3C62-46EA-880B-4E4FCBC2221C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{986EFFBE-3C62-46EA-880B-4E4FCBC2221C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{986EFFBE-3C62-46EA-880B-4E4FCBC2221C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{122DD18A-397A-4176-9156-4E53A5583FF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{122DD18A-397A-4176-9156-4E53A5583FF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{122DD18A-397A-4176-9156-4E53A5583FF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{122DD18A-397A-4176-9156-4E53A5583FF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF7DF5CC-27A9-45C8-81D3-B4E34925FE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF7DF5CC-27A9-45C8-81D3-B4E34925FE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF7DF5CC-27A9-45C8-81D3-B4E34925FE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF7DF5CC-27A9-45C8-81D3-B4E34925FE65}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
